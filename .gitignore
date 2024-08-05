@@ -125,4 +125,7 @@ work_dirs/
 # MobileVLM
 outputs
 w
-
+eval_results/
+logs/
+wandb/
+checkpoint/

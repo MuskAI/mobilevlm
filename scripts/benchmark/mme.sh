@@ -7,15 +7,15 @@ CHUNKS=${#GPULIST[@]}
 MODEL_LOADER=$1
 MODEL_DIR=$2
 CONV_MODE=$3
-SPLIT_NME=$4
+SPLIT_MME=$4
 DATA_ROOT=$5
-SAVE_PATH=$6/${SPLIT_NME}
+SAVE_PATH=$6/${SPLIT_MME}
 
 for IDX in $(seq 0 $((CHUNKS-1))); do
     CUDA_VISIBLE_DEVICES=${GPULIST[$IDX]} python -m ${MODEL_LOADER} \
         --model-path ${MODEL_DIR} \
-        --question-file ${DATA_ROOT}/${SPLIT_NME}.jsonl \
-        --image-folder ${DATA_ROOT}/images \
+        --question-file ${DATA_ROOT}/${SPLIT_MME}.jsonl \
+        --image-folder ${DATA_ROOT}/MME_Benchmark_release_version \
         --answers-file ${SAVE_PATH}/${CHUNKS}_${IDX}.jsonl \
         --num-chunks $CHUNKS \
         --chunk-idx $IDX \

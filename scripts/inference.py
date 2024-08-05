@@ -17,6 +17,9 @@ def inference_once(args):
     disable_torch_init()
     model_name = args.model_path.split('/')[-1]
     tokenizer, model, image_processor, context_len = load_pretrained_model(args.model_path, args.load_8bit, args.load_4bit)
+    # check model weights
+    print(model)
+    #####
 
     images = [Image.open(args.image_file).convert("RGB")]
     images_tensor = process_images(images, image_processor, model.config).to(model.device, dtype=torch.float16)

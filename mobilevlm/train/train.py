@@ -736,6 +736,13 @@ def train():
 
     parser = transformers.HfArgumentParser((ModelArguments, DataArguments, TrainingArguments))
     model_args, data_args, training_args = parser.parse_args_into_dataclasses()
+    ##### add by haoran
+    # 打印变量
+    print('Before loading model from checkpoint:')
+    print(f"Model Arguments:\n{model_args}\n")
+    print(f"Data Arguments:\n{data_args}\n")
+    print(f"Training Arguments:\n{training_args}\n")
+    ######################
     local_rank = training_args.local_rank
     compute_dtype = (torch.float16 if training_args.fp16 else (torch.bfloat16 if training_args.bf16 else torch.float32))
 
@@ -777,6 +784,15 @@ def train():
         )
     model.config.use_cache = False
 
+    ##### add by haoran
+    # 打印变量
+    print('After loading model from checkpoint:')
+    print(f"Model Arguments:\n{model_args}\n")
+    print(f"Data Arguments:\n{data_args}\n")
+    print(f"Training Arguments:\n{training_args}\n")
+    ######################
+    
+    
     if model_args.freeze_backbone:
         model.model.requires_grad_(False)
 
